@@ -1,0 +1,7 @@
+version: 2
+sources:
+  - name: dairy_source
+    database: dairy_agrictech
+    schema: raw
+    tables:
+      - name: daily_production
