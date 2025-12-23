@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: dim_cows
+    description: "Master list of all 1,000 cows in the dairy project."
+    columns:
+      - name: cow_id
+        description: "Primary key for the cow metadata."
+        tests:
+          - unique
+          - not_null
+
+  - name: fct_daily_yields
+    description: "Incremental table of daily milk production and feed intake."
+    columns:
+      - name: production_id
+        description: "Unique hash for each cow and date combination."
+        tests:
+          - unique
+          - not_null
+
+      - name: cow_id
+        description: "Foreign key to dim_cows."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_cows')
+              field: cow_id
+
+      - name: milk_yield_liters
+        description: "Daily milk produced in liters. Standard range is 0 to 100."
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 100
+              config:
+                severity: warn
+                warn_if: "> 50"   # Yellow warning if > 50 rows fail
+                error_if: "> 500" # Red error/stop if > 500 rows fail
+
+  - name: fct_animal_efficiency_stats
+    description: "Ranked list of cows by Feed Conversion Ratio (FCR). Used for breeding and culling decisions."
+    columns:
+      - name: efficiency_ratio
+        description: "The primary KPI (Milk/Feed). Targets are usually 1.2 to 1.7."
+        tests:
+          - not_null
