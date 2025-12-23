@@ -37,3 +37,11 @@ models:
                 severity: warn
                 warn_if: "> 50"   # Yellow warning if > 50 rows fail
                 error_if: "> 500" # Red error/stop if > 500 rows fail
+
+  - name: fct_animal_efficiency_stats
+    description: "Ranked list of cows by Feed Conversion Ratio (FCR). Used for breeding and culling decisions."
+    columns:
+      - name: efficiency_ratio
+        description: "The primary KPI (Milk/Feed). Targets are usually 1.2 to 1.7."
+        tests:
+          - not_null
