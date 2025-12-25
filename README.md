@@ -1,7 +1,7 @@
 # DAIRY_AGRICTECH
 
 ## Industrial Ag-Tech: 1,000-Cow Dairy Analytics Pipeline
-​An End-to-End dbt + Snowflake Data Engineering Project
+​An End-to-End dbt + Snowflake Analytics Engineering Project
 
 ### Project Overview
 ​Developed a robust Analytics Engineering pipeline to process synthetic data for a 1,000-cow dairy operation. This project mimics real-world sensor data from Danish Ag-Tech firms, focusing on Feed Conversion Ratio (FCR) and biological data validation.
